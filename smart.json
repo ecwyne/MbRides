@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "iron-router": {},
+    "velocity-quick-start": {},
+    "mocha-web-velocity": {},
+    "jasmine-unit": {},
+    "velocity-html-reporter": {}
+  }
+}
