@@ -5,8 +5,10 @@
 
 standard-app-packages
 insecure
-bootstrap
 underscore
 accounts-facebook
 accounts-base
 accounts-ui
+bootstrap-3
+flash-messages
+bootswatch-cerulean

@@ -1,0 +1,41 @@
+<template name="personPill">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapseOne">
+					{{name}}
+					{{formatPhone phone}}
+				</a>
+			</h4>
+		</div>
+		<div id="collapseOne" class="panel-collapse collapse">
+			<div class="panel-body">
+				<img src="{{facebookPic}}">
+				<ul class="list-group">
+					<li class="list-group-item">
+						<h3>Contact Info:</h3>
+						<p>Email: <a target="_blank" href="mailto:{{email}}">{{email}}</a></p>
+						<p>Phone: {{formatPhone phone}}</p>
+						<p>Facebook:
+							<a href="{{facebookUrl}}" target="_blank">
+								<img src="http://aweebitirish.com/wp-content/uploads/2014/04/facebook-button-transparent-background.png" height="30px" width="30px">
+							</a>
+						</p>
+					</li>
+					<li class="list-group-item">
+						<h3>Other Mb Groups:</h3>
+						<p>{{groups}}</p>
+					</li>
+					<li class="list-group-item">
+						<h3>Preferred pickup/drop-off location:</h3>
+						<p>{{location}}</p>
+					</li>
+					<li class="list-group-item">
+						<h3>About Me:</h3>
+						<p>{{bio}}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</template>

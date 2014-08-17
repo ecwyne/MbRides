@@ -1,5 +1,7 @@
 {
   "packages": {
-    "iron-router": {}
+    "bootstrap-3": {},
+    "flash-messages": {},
+    "bootswatch-cerulean": {}
   }
 }
