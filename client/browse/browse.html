@@ -1,0 +1,13 @@
+<template name="browse">
+	{{#if currentUser.profile.userProfile.userType}}
+	{{> filter}}
+	<h1>Browse {{potentialWhat}}</h1>
+	{{#each users}}
+	{{> personPill}}
+	{{/each}}
+	{{else}}
+	<div class="jumbotron">
+		<h2>Please complete your profile before browsing.</h2>
+	</div>
+	{{/if}}
+</template>

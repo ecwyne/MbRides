@@ -20,7 +20,7 @@ Template.profile.events({
 	'change input': setProfile,
 	'change textarea': setProfile,
 	'click .userTypeBtn': function(e){Meteor.users.update(Meteor.userId(), {$set: {'profile.userProfile.userType': e.target.textContent}})},
-	'click .studentBtn': function(e){Meteor.users.update(Meteor.userId(), {$set: {'profile.userProfile.student': e.target.textContent == 'Yes'}})},
+	'click .studentBtn': function(e){Meteor.users.update(Meteor.userId(), {$set: {'profile.userProfile.student': e.target.textContent.toLowerCase()}})},
 	'click .serviceBtn': function(e){Meteor.users.update(Meteor.userId(), {$set: {'profile.userProfile.service': e.target.textContent}})}
 });
 
@@ -30,8 +30,7 @@ Template.profile.helpers({
 	},
 	studentOption: function(bool){
 		if (typeof Meteor.user().profile.userProfile.student == 'undefined') return '';
-		if (Meteor.user().profile.userProfile.student && bool == 'yes') return 'active';
-		if (!Meteor.user().profile.userProfile.student && bool == 'no') return 'active';
+		if (Meteor.user().profile.userProfile.student == bool) return 'active';
 	},
 	serviceOption: function(time){
 		if (typeof Meteor.user().profile.userProfile.service == 'undefined') return '';
@@ -41,4 +40,12 @@ Template.profile.helpers({
 
 Template.profile.me = function(){
 	return Meteor.user().profile.userProfile;
+}
+
+Template.profile.inbox = function(){
+
+}
+
+Template.profile.outbox = function(){
+	return Meteor.users.find({'profile.userProfile.requests': Meteor.user().profile.userProfile.id}).map(function(e){return e.profile.userProfile});
 }

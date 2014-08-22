@@ -4,7 +4,8 @@
     "basePackages": {
       "bootstrap-3": {},
       "flash-messages": {},
-      "bootswatch-cerulean": {}
+      "bootswatch-cerulean": {},
+      "handlebar-helpers": {}
     },
     "packages": {
       "bootstrap-3": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/Ryan-Myers/meteor-bootswatch-cerulean.git",
         "tag": "v3.2.0-3",
         "commit": "3e283aae8449c6b4c0e566321326c18c95c3048c"
+      },
+      "handlebar-helpers": {
+        "git": "https://github.com/raix/Meteor-handlebar-helpers.git",
+        "tag": "v0.1.1",
+        "commit": "0b407ab65e7c1ebd53d71aef0de2e2c1d21a597c"
       }
     }
   }
