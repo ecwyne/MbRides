@@ -12,19 +12,31 @@
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<div class="row">
-						<div class="col-xs-8">
+						<div class="col-xs-7">
 							<a data-toggle="collapse" href="#fb{{id}}">
 								<kbd>{{service}}</kbd>
 								{{name}}
 							</a>
 						</div>
-						<div class="col-xs-4">
+						<div class="col-xs-5">
 							{{#if $.Session.equals 'page' 'browse'}}
 								{{#if hasSentRequest}}
 								<button type="button" class="btn btn-primary btn-warning btn-xs" disabled="true">Request Sent</button>
 								{{else}}
 								<button type="button" class="btn btn-primary btn-success btn-xs sendRequest">Send Request</button>
 								{{/if}}
+							{{/if}}
+							{{#if $.Session.equals 'page' 'profile'}}
+								{{#unless isMe}}
+									{{#if hasSentRequest}}
+										<button type="button" class="btn btn-primary btn-warning btn-xs">Remove</button>
+									{{else}}
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary btn-success btn-xs">Accept</button>
+											<button type="button" class="btn btn-primary btn-danger btn-xs deleteInbox">Delete</button>
+										</div>
+									{{/if}}
+								{{/unless}}
 							{{/if}}
 						</div>
 					</div>

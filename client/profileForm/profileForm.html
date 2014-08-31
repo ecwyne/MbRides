@@ -1,0 +1,25 @@
+<template name="updateProfile">
+	{{#autoForm collection=users id="updateProfileForm" type="update" doc=this}}
+	{{> afQuickField name="profile.name"}}
+	{{> afQuickField name="profile.email"}}
+	{{> afBtnGroup collection=users name="profile.service"}}
+	{{> afQuickField name="profile.groups"}}
+	{{> afBtnGroup collection=users name="profile.type"}}
+
+	<button type="submit" class="btn btn-primary btn-lg">Save</button>
+
+	{{/autoForm}}
+</template>
+
+<template name="afBtnGroup">
+	{{> afFieldLabel name=name}}
+	<div style="display: none;">
+		{{> afQuickField name=name}}
+	</div>
+	<br/>
+	<div class="btn-group">
+		{{#each fieldVals}}
+		<button type="button" class="btn btn-primary btnGroup {{btnGroupActive ../name value}}" data-name="{{../name}}" data-value="{{value}}">{{label}}</button>
+		{{/each}}
+	</div>
+</template>

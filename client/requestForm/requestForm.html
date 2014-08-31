@@ -1,0 +1,25 @@
+<template name="insertRequest">
+	{{#autoForm id="insertRequestForm" collection="Requests" type="insert"}}
+		{{> afQuickField name="type"}}
+		{{#if afFieldValueIs name="type" value="single"}}
+			{{> afQuickField name="date"}}
+		{{/if}}
+		{{> afQuickField name="notes"}}
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+		</div>
+	{{/autoForm}}
+</template>
+
+<template name="updateRequest">
+	{{#autoForm id="updateRequestForm" collection="Requests" type="update" doc=this}}
+		{{> afQuickField name="type"}}
+		{{#if afFieldValueIs name="type" value="single"}}
+			{{> afQuickField name="date"}}
+		{{/if}}
+		{{> afQuickField name="notes"}}
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+		</div>
+	{{/autoForm}}
+</template>

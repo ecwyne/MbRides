@@ -43,9 +43,11 @@ Template.profile.me = function(){
 }
 
 Template.profile.inbox = function(){
-
+	var orObj = Meteor.user().profile.userProfile.requests.map(function (e){return {'profile.userProfile.id': e}; });
+	if (orObj.length)
+		return Meteor.users.find({$or: orObj}).map(function (e){return e.profile.userProfile});
 }
 
 Template.profile.outbox = function(){
-	return Meteor.users.find({'profile.userProfile.requests': Meteor.user().profile.userProfile.id}).map(function(e){return e.profile.userProfile});
+	return Meteor.users.find({'profile.userProfile.requests': Meteor.user().profile.userProfile.id}).map(function (e){return e.profile.userProfile});
 }

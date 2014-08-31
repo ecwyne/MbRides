@@ -3,5 +3,5 @@ UI.registerHelper('formatPhone', function (phone){
 });
 
 UI.registerHelper('activePage', function (page){
-	return Session.get('page') == page ? 'active' : '';
+	return page == Router.current().route.name ? 'active' : '';
 });

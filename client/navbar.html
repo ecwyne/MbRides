@@ -1,6 +1,6 @@
 <template name="navbar">
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
+	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -9,23 +9,31 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img src="http://www.mountainbrook.net/_/rsrc/1248895640130/config/app/images/customLogo/customLogo.gif?revision=61"></a>
+				<a class="navbar-brand" href="#"><img style="width: 150px; margin-top: -10px;" src="http://www.mountainbrook.net/_/rsrc/1248895640130/config/app/images/customLogo/customLogo.gif?revision=61"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="{{activePage 'profile'}}"><a class="profileTab">My Profile</a></li>
-					<li class="{{activePage 'browse'}}"><a class="browseTab">Browse</a></li>
+					<li class="{{activePage 'main'}}"><a href="/">Main</a></li>
+
+					{{#if currentUser}}
+					<li class="{{activePage 'updateProfile'}}"><a href="/about-me">About Me</a></li>
+					<li class="{{activePage 'myVehicle'}}"><a href="/my-vehicle">My Vehicle Info</a></li>
+					<li class="{{activePage 'insertRequest'}}"><a href="/request/new">Add New Request</a></li>
+					{{/if}}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					{{#if currentUser}}
-					<li><a><img src="http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture?height=30&width=30" ></a></li>
+
+					<li><a>
+						<img src="http://graph.facebook.com/{{currentUser.profile.id}}/picture?height=30&width=30" >
+					</a></li>
 					{{/if}}
-					<li><a>{{> loginButtons}}</a></li>
+					<li><a href="#">{{> loginButtons}}</a></li>
 				</ul>
+
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
-		{{> flashMessages}}
 	</nav>
 </template>

@@ -4,12 +4,17 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-insecure
-underscore
 accounts-facebook
 accounts-base
+mrt:flash-messages@0.2.4
+raix:handlebar-helpers@0.1.1
+underscore
+mizzao:bootstrap-3
+aldeed:autoform
+cmather:iron-router
+aldeed:collection2
+arunoda:subs-manager
+deepwell:bootstrap-datepicker2
+mrt:moment
 accounts-ui
-bootstrap-3
-flash-messages
-bootswatch-cerulean
-handlebar-helpers
+

@@ -1,6 +1,6 @@
-Accounts.onCreateUser(function(options, user){
+Accounts.onCreateUser(function (options, user){
 	user.profile = options.profile;
-	user.profile.userProfile = {
+	user.profile = _.extend({
 		name: options.profile.name,
 		email: user.services.facebook.email,
 		gender: user.services.facebook.gender,
@@ -8,6 +8,6 @@ Accounts.onCreateUser(function(options, user){
 		facebookUrl: 'https://facebook.com/' + user.services.facebook.id,
 		id: user.services.facebook.id,
 		requests: []
-	}
+	})
 	return user;
 });

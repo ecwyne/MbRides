@@ -3,26 +3,5 @@
 	<link rel="shortcut icon" href="http://www.mountainbrook.net/_/rsrc/1248895640130/config/app/images/customLogo/customLogo.gif">
 </head>
 <body>
-	<style>
-	footer {
-		bottom: 0;
-		width: 100%;
-		/* Set the fixed height of the footer here */
-		height: 60px;
-		background-color: #f5f5f5;
-		padding-top: 20px;
-	}
-	</style>
-	{{> navbar}}
-	<div class="container-fluid well" style="margin-top: 70px;">
-		{{#if currentUser}}
-			{{> main}}
-		{{else}}
-		<div class="jumbotron text-center">
-			<h1>Please sign in to view rides.</h1>
-			{{> loginButtons}}
-		</div>
-		{{/if}}
-	</div>
-	<footer class="text-center">Send any questions or comments to <a target="_blank" href="mailto:ecwyne@gmail.com">Eric Wyne</a></footer>
+	
 </body>

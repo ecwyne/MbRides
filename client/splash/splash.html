@@ -1,41 +1,11 @@
 <template name="splash">
-	<style>
-	.footer {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		/* Set the fixed height of the footer here */
-		height: 60px;
-		background-color: #f5f5f5;
-	}
-	.text-muted {
-		margin: 20px 0;
-	}
-	</style>
-	<div class="text-center">
-		{{#if currentUser}}
-		<h1>Hello <a href="https://facebook.com/{{currentUser.services.facebook.id}}" target="_blank">{{currentUser.profile.name}}</a>!</h1>
-		<h2>You are a {{currentUser.services.facebook.gender}}</h2>
-		<h2>And you can be reached at <a target="_blank" href="mailto:{{currentUser.services.facebook.email}}">{{currentUser.services.facebook.email}}</a></h2>
-
-		<img src="http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture?height=200&width=200" >
-		{{else}}
-		<div>
-			<h1>Been here before? Login!</h1>
-			{{> loginButtons}}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Hello, world!</h1>
+			<p>Contents ...</p>
+			<p>
+				<a class="btn btn-primary btn-lg">Learn more</a>
+			</p>
 		</div>
-		<br>
-		<div>
-			<h2>Otherwise...</h2>
-			<h1>Signup as a</h1>
-			<button class="btn btn-large btn-primary driverSignup">Driver!</button>
-			<button class="btn btn-large btn-primary passengerSignup">Passenger!</button>
-		</div>
-		{{/if}}
-		<div class="footer">
-			<p class="text-muted">There are currently <strong>{{userCount}}</strong> users signed up!</p>
-		</div>
-		
-
 	</div>
 </template>

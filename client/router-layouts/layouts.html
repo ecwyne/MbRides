@@ -1,0 +1,28 @@
+<template name="layoutTemplate">
+	{{> navbar}}
+	<div class="container" style="margin-top: 70px;">
+		{{> flashMessages}}
+		{{> yield}}
+	</div>
+</template>
+
+<template name="loadingTemplate">
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Loading</h1>
+			<p>Your data are loading...</p>
+		</div>
+	</div>
+</template>
+
+<template name="notFoundTemplate">
+	<div class="jumbotron text-center">
+		<div class="container">
+			<h1>404 Not Found</h1>
+			<p>This route was not found, please try another route.</p>
+			<p>
+				<a href="/" class="btn btn-primary btn-lg">GO HOME!</a>
+			</p>
+		</div>
+	</div>
+</template>
