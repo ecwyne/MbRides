@@ -1,0 +1,37 @@
+<template name="viewUsers">
+	<table class="table table-bordered text-center">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each users}}
+			<tr>
+				<td><a href="/user/view/{{_id}}">{{profile.name}}</a></td>
+				<td>{{formatPhone profile.phone}}</td>
+				<td><a href="mailto:{{profile.email}}">{{profile.email}}</a></td>
+				<td>{{#each profile.roles}} <button class="btn btn-primary btn-xs" disabled>{{this}}</button> {{/each}}</td>
+				<td>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+							Actions <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="/small-group/new/{{_id}}">Create Small Group</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

@@ -7,7 +7,6 @@ standard-app-packages
 accounts-facebook
 accounts-base
 mrt:flash-messages@0.2.4
-raix:handlebar-helpers@0.1.1
 underscore
 mizzao:bootstrap-3
 aldeed:autoform
@@ -17,4 +16,7 @@ arunoda:subs-manager
 deepwell:bootstrap-datepicker2
 mrt:moment
 accounts-ui
+raix:handlebar-helpers
+dburles:collection-helpers
+mrt:publish-with-relations
 

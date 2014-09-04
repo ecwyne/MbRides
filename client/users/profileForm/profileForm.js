@@ -1,5 +1,5 @@
 Template.updateProfile.rendered = function(){
-	setTimeout(function(){formDep.changed()}, 500);
+	setTimeout(function(){formDep.changed()}, 0);
 }
 
 Template.updateProfile.users = function(){
@@ -19,7 +19,11 @@ AutoForm.addHooks(['insertProfileForm', 'updateProfileForm'],{
 		FlashMessages.sendSuccess('Your request information has been saved.');
 	},
 	onError: function(operator, error, template){
-		FlashMessages.sendError('Error: ' + error.reason);
+		if (error.message == 'no is not an allowed value'){
+			FlashMessages.sendError('Error: You must agree to use discernment. Come on, really?');
+		} else {
+			FlashMessages.sendError('Error: ' + error.reason);
+		}
 	}
 });
 

@@ -1,0 +1,32 @@
+<template name="viewGroups">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Group Name</th>
+				<th>Owner</th>
+				<th>Live</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each groups}}
+			<tr>
+				<td>{{type}}</td>
+				<td><a href="/group/view/{{_id}}">{{title}}</a></td>
+				<td>
+					{{#each leaders}}
+						<a href="/user/view/{{this}}">{{nameLookup this}}</a>
+					{{/each}}
+				</td>
+				<td>
+					{{#if live}}
+						<span style="color: green;" class="glyphicon glyphicon-check"></span>
+					{{else}}
+						<span style="color: red;" class="glyphicon glyphicon-unchecked"></span>
+					{{/if}}
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

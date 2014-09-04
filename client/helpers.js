@@ -5,3 +5,13 @@ UI.registerHelper('formatPhone', function (phone){
 UI.registerHelper('activePage', function (page){
 	return page == Router.current().route.name ? 'active' : '';
 });
+
+UI.registerHelper('isAdmin', function(){
+	return Meteor.roles.isAdmin();
+});
+
+UI.registerHelper('getUser', function (id, attr){
+	if (typeof attr == 'string')
+		return Meteor.users.findOne({_id: id.toString()})[attr];
+	return Meteor.users.findOne({_id: id.toString()});
+});

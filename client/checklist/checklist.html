@@ -1,0 +1,21 @@
+<template name="checklist">
+	{{#unless allDone}}
+	{{#if currentUser}}
+	<div class="alert alert-info">
+		<strong>Get Setup:</strong>
+		{{#each steps}}
+		<span style="{{style this}}">
+			{{step}}. 
+			{{#if complete}}
+			{{text}}
+			{{else}}
+			<a href="{{link}}">
+				{{text}}
+			</a>
+			{{/if}}
+		</span>
+		{{/each}}
+	</div>
+	{{/if}}
+	{{/unless}}
+</template>

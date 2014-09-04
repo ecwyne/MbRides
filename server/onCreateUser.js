@@ -7,7 +7,7 @@ Accounts.onCreateUser(function (options, user){
 		facebookPic: 'http://graph.facebook.com/' + user.services.facebook.id + '/picture?height=200&width=200',
 		facebookUrl: 'https://facebook.com/' + user.services.facebook.id,
 		id: user.services.facebook.id,
-		requests: []
+		roles: ['user']
 	})
 	return user;
 });

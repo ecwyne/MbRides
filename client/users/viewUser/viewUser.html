@@ -1,0 +1,44 @@
+<template name="viewUser">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Attribute</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Name</td>
+				<td>{{profile.name}}</td>
+			</tr>
+			<tr>
+				<td>Facebook</td>
+				<td><a href="{{profile.facebookUrl}}">Facebook</a></td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td>{{formatPhone profile.phone}}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{profile.email}}</td>
+			</tr>
+			<tr>
+				<td>Bio</td>
+				<td>{{profile.bio}}</td>
+			</tr>
+			<tr>
+				<td>Other Mb Groups</td>
+				<td>{{profile.groups}}</td>
+			</tr>
+			<tr>
+				<td>Owned Groups</td>
+				<td>
+					{{#each ownerGroups}}
+						<a href="/group/view/{{_id}}">{{title}}</a>
+					{{/each}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</template>

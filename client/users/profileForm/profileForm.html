@@ -2,10 +2,21 @@
 	{{#autoForm collection=users id="updateProfileForm" type="update" doc=this}}
 	{{> afQuickField name="profile.name"}}
 	{{> afQuickField name="profile.email"}}
-	{{> afBtnGroup collection=users name="profile.service"}}
-	{{> afQuickField name="profile.groups"}}
+	{{> afQuickField name="profile.phone"}}
+	{{#unless afFieldValueIs name="profile.type" value="passenger"}}
+	{{#unless afFieldValueIs name="profile.type" value="driver"}}
 	{{> afBtnGroup collection=users name="profile.type"}}
+	{{/unless}}
+	{{/unless}}
+	{{> afBtnGroup collection=users name="profile.service"}}
+	{{> afBtnGroup collection=users name="profile.student"}}
+	{{> afQuickField name="profile.groups"}}
+	{{> afQuickField name="profile.bio"}}
+	{{> afQuickField name="profile.location"}}
+	{{> afBtnGroup collection=users name="profile.confirm"}}
 
+	<br/>
+	<br/>
 	<button type="submit" class="btn btn-primary btn-lg">Save</button>
 
 	{{/autoForm}}
@@ -22,4 +33,5 @@
 		<button type="button" class="btn btn-primary btnGroup {{btnGroupActive ../name value}}" data-name="{{../name}}" data-value="{{value}}">{{label}}</button>
 		{{/each}}
 	</div>
+	<br />
 </template>

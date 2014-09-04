@@ -1,0 +1,126 @@
+<template name="viewGroup">
+	<h1>{{title}}</h1>
+	<div class="text-right">
+		{{#if live}}
+			Group is Live:
+			<span style="color: green;" class="glyphicon glyphicon-check groupLive"></span>
+		{{else}}
+			Group is not Live:
+			<span style="color: red;" class="glyphicon glyphicon-unchecked groupLive"></span>
+			{{#if isLeader}}<button type="button" class="btn btn-success btn-block groupLive">GO LIVE!</button>{{/if}}
+		{{/if}}
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading">
+				<h3 class="panel-title">Group Description</h3>
+		  </div>
+		  <div class="panel-body">
+				<div style="word-break: break-word; white-space: pre-wrap;">{{description}}</div>
+				{{#if isLeader}}
+				<span class="pull-right">
+					<button class="btn btn-primary" data-toggle="modal" data-target="#editDescriptionModal">
+						Edit
+					</button>
+				</span>
+				{{/if}}
+		  </div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading">
+				<h3 class="panel-title">Group Location</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<div style="word-break: break-word; white-space: pre-wrap;">{{location}}</div>
+				{{#if isLeader}}
+				<span class="pull-right">
+					<button class="btn btn-primary" data-toggle="modal" data-target="#editLocationModal">
+						Edit
+					</button>
+				</span>
+				{{/if}}
+		  </div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading">
+				<h3 class="panel-title">Maximum Group Size</h3>
+		  </div>
+		  <div class="panel-body">
+				<h1>{{maxSize}}</h1>
+				{{#if isLeader}}
+					<button type="button" class="btn btn-danger decSize">
+						<span class="glyphicon-minus"></span>
+					</button>
+					<button type="button" class="btn btn-success incSize">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				{{/if}}
+		  </div>
+	</div>
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Leaders</div>	
+			<!-- Table -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each leaderDocs}}
+							{{#with profile}}
+								<tr>
+									<td><a href="/user/view/{{../_id}}">{{name}}</a></td>
+									<td>{{formatPhone phone}}</td>
+									<td><a target="_blank" href="mailto:{{email}}">{{email}}</a></td>
+								</tr>
+							{{/with}}
+					{{/each}}
+				</tbody>
+			</table>
+	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="editDescriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Group Description</h4>
+      </div>
+      		{{#autoForm id="modalDescriptionUpdate" collection="Groups" type="update" doc=group }}
+      <div class="modal-body">
+			{{> afFieldInput name="description"}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      {{> flashMessages}}
+      {{/autoForm}}
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Group Description</h4>
+      </div>
+      		{{#autoForm id="modalLocationUpdate" collection="Groups" type="update" doc=group }}
+      <div class="modal-body">
+			{{> afFieldInput name="location"}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      {{> flashMessages}}
+      {{/autoForm}}
+    </div>
+  </div>
+</div>
+</template>

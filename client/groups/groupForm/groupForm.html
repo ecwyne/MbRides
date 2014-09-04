@@ -1,0 +1,17 @@
+<template name="insertGroup">
+	<h1>Leader: {{leader}}</h1>
+	{{#autoForm collection="Groups" id="insertSmallGroupForm" type="insert" doc=this}}
+		{{> afQuickField name="title"}}
+		{{> afQuickField name="maxSize"}}
+		{{> afQuickField name="description"}}
+		{{> afQuickField name="location"}}
+		<div style="display: none;">
+		{{> afQuickField name="leaders"}}
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg">Insert</button>
+	{{/autoForm}}
+</template>
+
+<template name="updateGroup">
+	
+</template>
