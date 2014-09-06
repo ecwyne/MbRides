@@ -14,7 +14,15 @@ Groups.deny({
 //Non-Admin cannot create small-group
 Groups.deny({
 	insert: function (userId, doc){
-		return !Meteor.roles.isAdmin(userId);
+		if (doc.type == 'small-group')
+			return !Meteor.roles.isAdmin(userId);
+	}
+});
+
+//Members/Leaders cannot submit request
+Groups.deny({
+	update: function(userId, doc, fieldNames, modifier){
+		return _.contains(doc.members, userId) || _.contains(doc.leaders, userId) && _.isEqual(_.pick(modifier, '$addToSet'), {$addToSet: {requests: userId}})
 	}
 });
 
@@ -36,10 +44,10 @@ Groups.allow({
 	}
 });
 
-//Users can insert a car
+//Users can insert a community-group
 Groups.allow({
 	insert: function (userId, doc){
-		return userId && doc.type == 'car';
+		return userId && doc.type == 'community-group';
 	}
 });
 

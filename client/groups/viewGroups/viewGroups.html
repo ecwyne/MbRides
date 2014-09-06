@@ -5,6 +5,7 @@
 				<th>Type</th>
 				<th>Group Name</th>
 				<th>Owner</th>
+				<th>Capacity</th>
 				<th>Live</th>
 			</tr>
 		</thead>
@@ -17,6 +18,9 @@
 					{{#each leaders}}
 						<a href="/user/view/{{this}}">{{nameLookup this}}</a>
 					{{/each}}
+				</td>
+				<td>
+					{{size}} of {{maxSize}}
 				</td>
 				<td>
 					{{#if live}}

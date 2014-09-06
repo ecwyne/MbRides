@@ -1,126 +1,211 @@
 <template name="viewGroup">
 	<h1>{{title}}</h1>
+	{{#unless inGroup currentUser}}
+		{{#unless hasRequested currentUser}}
+			<button type="button" class="btn btn-success requestMembership" title="It's Free!">Request Membership</button>
+		{{else}}
+		<button type="button" class="btn btn-warning">Request Sent</button>
+		{{/unless}}
+	{{/unless}}
 	<div class="text-right">
 		{{#if live}}
-			Group is Live:
-			<span style="color: green;" class="glyphicon glyphicon-check groupLive"></span>
+		Group is Live:
+		<span style="color: green;" class="glyphicon glyphicon-check groupLive"></span>
 		{{else}}
-			Group is not Live:
-			<span style="color: red;" class="glyphicon glyphicon-unchecked groupLive"></span>
-			{{#if isLeader}}<button type="button" class="btn btn-success btn-block groupLive">GO LIVE!</button>{{/if}}
+		Group is not Live:
+		<span style="color: red;" class="glyphicon glyphicon-unchecked groupLive"></span>
+		{{#if isLeader}}<button type="button" class="btn btn-success btn-block groupLive">GO LIVE!</button>{{/if}}
 		{{/if}}
 	</div>
 	<div class="panel panel-default">
-		  <div class="panel-heading">
-				<h3 class="panel-title">Group Description</h3>
-		  </div>
-		  <div class="panel-body">
-				<div style="word-break: break-word; white-space: pre-wrap;">{{description}}</div>
-				{{#if isLeader}}
-				<span class="pull-right">
-					<button class="btn btn-primary" data-toggle="modal" data-target="#editDescriptionModal">
-						Edit
-					</button>
-				</span>
-				{{/if}}
-		  </div>
+		<div class="panel-heading">
+			<h3 class="panel-title">Group Description</h3>
+		</div>
+		<div class="panel-body">
+			<div style="word-break: break-word; white-space: pre-wrap;">{{description}}</div>
+			{{#if isLeader}}
+			<span class="pull-right">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#editDescriptionModal">
+					Edit
+				</button>
+			</span>
+			{{/if}}
+		</div>
 	</div>
 	<div class="panel panel-default">
-		  <div class="panel-heading">
-				<h3 class="panel-title">Group Location</h3>
-		  </div>
-		  <div class="panel-body">
-		  	<div style="word-break: break-word; white-space: pre-wrap;">{{location}}</div>
-				{{#if isLeader}}
-				<span class="pull-right">
-					<button class="btn btn-primary" data-toggle="modal" data-target="#editLocationModal">
-						Edit
-					</button>
-				</span>
-				{{/if}}
-		  </div>
+		<div class="panel-heading">
+			<h3 class="panel-title">Group Location</h3>
+		</div>
+		<div class="panel-body">
+			<div style="word-break: break-word; white-space: pre-wrap;">{{location}}</div>
+			{{#if isLeader}}
+			<span class="pull-right">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#editLocationModal">
+					Edit
+				</button>
+			</span>
+			{{/if}}
+		</div>
 	</div>
 	<div class="panel panel-default">
-		  <div class="panel-heading">
-				<h3 class="panel-title">Maximum Group Size</h3>
-		  </div>
-		  <div class="panel-body">
-				<h1>{{maxSize}}</h1>
-				{{#if isLeader}}
-					<button type="button" class="btn btn-danger decSize">
-						<span class="glyphicon-minus"></span>
-					</button>
-					<button type="button" class="btn btn-success incSize">
-						<span class="glyphicon glyphicon-plus"></span>
-					</button>
-				{{/if}}
-		  </div>
+		<div class="panel-heading">
+			<h3 class="panel-title">Maximum Group Size</h3>
+		</div>
+		<div class="panel-body">
+			<h1>{{size}}/{{maxSize}}</h1>
+			{{#if isLeader}}
+			<button type="button" class="btn btn-danger decSize">
+				<span class="glyphicon-minus"></span>
+			</button>
+			<button type="button" class="btn btn-success incSize">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+			{{/if}}
+			<h2>{{vacancies}} spots left.</h2>
+		</div>
 	</div>
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
 		<div class="panel-heading">Leaders</div>	
-			<!-- Table -->
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Phone</th>
-						<th>Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each leaderDocs}}
-							{{#with profile}}
-								<tr>
-									<td><a href="/user/view/{{../_id}}">{{name}}</a></td>
-									<td>{{formatPhone phone}}</td>
-									<td><a target="_blank" href="mailto:{{email}}">{{email}}</a></td>
-								</tr>
-							{{/with}}
-					{{/each}}
-				</tbody>
-			</table>
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each leaderDocs}}
+				<tr>
+					<td><a href="/user/view/{{_id}}">{{profile.name}}</a></td>
+					<td>{{formatPhone profile.phone}}</td>
+					<td><a target="_blank" href="mailto:{{profile.email}}">{{profile.email}}</a></td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Members</div>	
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					{{#if isLeader}}
+					<th>Actions</th>
+					{{/if}}
+				</tr>
+			</thead>
+			<tbody>
+				{{#each memberDocs}}
+				<tr>
+					<td><a href="/user/view/{{_id}}">{{profile.name}}</a></td>
+					<td>{{formatPhone profile.phone}}</td>
+					<td><a target="_blank" href="mailto:{{email}}">{{profile.email}}</a></td>
+					{{#if isLeader}}
+					<td>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+								Actions <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Make a group leader</a></li>
+								<li class="bg-danger"><a class="removeMember" href="#">Remove from group</a></li>
+							</ul>
+						</div>
+					</td>
+					{{/if}}
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{#if requests}}
+	{{#if isLeader}}
+	<div class="panel panel-success">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Requests</div>	
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each requestDocs}}
+				<tr>
+					<td><a href="/user/view/{{_id}}">{{profile.name}}</a></td>
+					<td>{{formatPhone profile.phone}}</td>
+					<td><a target="_blank" href="mailto:{{email}}">{{profile.email}}</a></td>
+					<td>
+						<div class="btn-group">
+							<button type="button" class="btn btn-sm btn-success acceptRequest">Accept Request</button>
+							<button type="button" class="btn btn-sm btn-danger removeRequest">Remove Request</button>
+						</div>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{/if}}
+	{{/if}}
+	<div class="panel panel-default">
+		  <div class="panel-heading">
+				<h3 class="panel-title">Group Schedule</h3>
+		  </div>
+		  {{> schedule}}
 	</div>
 
-<!-- Modal -->
-<div class="modal fade" id="editDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="editDescriptionModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Group Description</h4>
-      </div>
-      		{{#autoForm id="modalDescriptionUpdate" collection="Groups" type="update" doc=group }}
-      <div class="modal-body">
-			{{> afFieldInput name="description"}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-      {{> flashMessages}}
-      {{/autoForm}}
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Group Description</h4>
-      </div>
-      		{{#autoForm id="modalLocationUpdate" collection="Groups" type="update" doc=group }}
-      <div class="modal-body">
-			{{> afFieldInput name="location"}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-      {{> flashMessages}}
-      {{/autoForm}}
-    </div>
-  </div>
-</div>
+	<!-- Modal -->
+	<div class="modal fade" id="editDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="editDescriptionModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Group Description</h4>
+				</div>
+				{{#autoForm id="modalDescriptionUpdate" collection="Groups" type="update" doc=group }}
+				<div class="modal-body">
+					{{> afFieldInput name="description"}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+				{{> flashMessages}}
+				{{/autoForm}}
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Group Description</h4>
+				</div>
+				{{#autoForm id="modalLocationUpdate" collection="Groups" type="update" doc=group }}
+				<div class="modal-body">
+					{{> afFieldInput name="location"}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+				{{> flashMessages}}
+				{{/autoForm}}
+			</div>
+		</div>
+	</div>
 </template>

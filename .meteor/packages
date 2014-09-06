@@ -6,11 +6,10 @@
 standard-app-packages
 accounts-facebook
 accounts-base
-mrt:flash-messages@0.2.4
+mrt:flash-messages
 underscore
 mizzao:bootstrap-3
 aldeed:autoform
-cmather:iron-router
 aldeed:collection2
 arunoda:subs-manager
 deepwell:bootstrap-datepicker2
@@ -19,4 +18,6 @@ accounts-ui
 raix:handlebar-helpers
 dburles:collection-helpers
 mrt:publish-with-relations
+email
+iron:router
 

@@ -1,44 +1,109 @@
 <template name="viewUser">
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>Attribute</th>
-				<th>Value</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Name</td>
-				<td>{{profile.name}}</td>
-			</tr>
-			<tr>
-				<td>Facebook</td>
-				<td><a href="{{profile.facebookUrl}}">Facebook</a></td>
-			</tr>
-			<tr>
-				<td>Phone</td>
-				<td>{{formatPhone profile.phone}}</td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td>{{profile.email}}</td>
-			</tr>
-			<tr>
-				<td>Bio</td>
-				<td>{{profile.bio}}</td>
-			</tr>
-			<tr>
-				<td>Other Mb Groups</td>
-				<td>{{profile.groups}}</td>
-			</tr>
-			<tr>
-				<td>Owned Groups</td>
-				<td>
-					{{#each ownerGroups}}
-						<a href="/group/view/{{_id}}">{{title}}</a>
-					{{/each}}
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<h1>{{profile.name}}</h1>
+	<div class="row">
+		<div class="col-lg-10">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Contact Info</h3>
+				</div>
+				<div class="panel-body">
+					<p>Facebook: <a href="{{profile.facebookUrl}}" target="_blank">Facebook</a></p>
+					<p>Phone: {{formatPhone profile.phone}}</p>
+					<p>Email: <a href="mailto:{{profile.email}}" target="_blank">{{profile.email}}</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<center>
+				<img src="{{profile.facebookPic}}" alt="">
+			</center>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Bio</h3>
+		</div>
+		<div class="panel-body">
+			<div class="newLine">{{profile.bio}}</div>
+		</div>
+	</div>
+	{{#if leaderships.count}}
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Groups I Lead</div>		
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Group Name</th>
+					<th>Capacity</th>
+					<th>Pending Requests</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each leaderships}}
+				<tr>
+					<td><a href="/group/view/{{_id}}">{{title}}</a></td>
+					<td>{{size}} of {{maxSize}}</td>
+					<td>{{requests.length}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{/if}}
+	{{#if memberships.count}}
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Groups I Attend</div>		
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Group Name</th>
+					<th>Capacity</th>
+					<th>Pending Requests</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each memberships}}
+				<tr>
+					<td><a href="/group/view/{{_id}}">{{title}}</a></td>
+					<td>{{size}} of {{maxSize}}</td>
+					<td>{{requests.length}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{/if}}
+	{{#if requests.count}}
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Groups I Have Requested</div>		
+		<!-- Table -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Group Name</th>
+					<th>Capacity</th>
+					<th>Pending Requests</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each requests}}
+				<tr>
+					<td><a href="/group/view/{{_id}}">{{title}}</a></td>
+					<td>{{size}} of {{maxSize}}</td>
+					<td>{{requests.length}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{/if}}
+	<div class="panel panel-default" id="my-schedule">
+		<div class="panel-heading">My Schedule (click and drag, changes saved automatically)</div>
+			{{> schedule}}
+	</div>
 </template>

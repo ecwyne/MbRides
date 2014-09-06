@@ -15,3 +15,7 @@ UI.registerHelper('getUser', function (id, attr){
 		return Meteor.users.findOne({_id: id.toString()})[attr];
 	return Meteor.users.findOne({_id: id.toString()});
 });
+
+UI.registerHelper('json', function (obj){
+	return JSON.stringify(obj);
+});

@@ -1,0 +1,15 @@
+.newLine {
+	word-break: break-word; 
+	white-space: pre-wrap;
+}
+.scheduleTable tr td {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-user-select: none;
+	cursor: pointer;
+}
+.scheduleTable tr th {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-user-select: none;
+}
