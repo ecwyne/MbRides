@@ -34,7 +34,7 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Group Location</h3>
+			<h3 class="panel-title">Group Location {{#if city}}({{city}}){{/if}}</h3>
 		</div>
 		<div class="panel-body">
 			<div style="word-break: break-word; white-space: pre-wrap;">{{location}}</div>
@@ -197,7 +197,8 @@
 				</div>
 				{{#autoForm id="modalLocationUpdate" collection="Groups" type="update" doc=group }}
 				<div class="modal-body">
-					{{> afFieldInput name="location"}}
+					{{> afQuickField name="city"}}
+					{{> afQuickField name="location"}}
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

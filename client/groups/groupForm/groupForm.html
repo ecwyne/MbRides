@@ -2,6 +2,7 @@
 	<h1>Leader: {{leader}}</h1>
 	{{#autoForm collection="Groups" id="insertSmallGroupForm" type="insert" doc=this}}
 		{{> afQuickField name="title"}}
+		{{> afQuickField name="city"}}
 		{{> afQuickField name="maxSize"}}
 		{{> afQuickField name="description"}}
 		{{> afQuickField name="location"}}
@@ -16,6 +17,7 @@
 	<h1>Leader: {{leader}}</h1>
 	{{#autoForm collection="Groups" id="insertCommunityGroupForm" type="insert" doc=this}}
 		{{> afQuickField name="title"}}
+		{{> afQuickField name="city"}}
 		{{> afQuickField name="maxSize"}}
 		{{> afQuickField name="description"}}
 		{{> afQuickField name="location"}}
